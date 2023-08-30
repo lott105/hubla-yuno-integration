@@ -23,98 +23,98 @@ export const useYunoSecureFields = (sessionId) => {
 
   
   /** Adding this timeout, we can render the component properly */
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (!secureFields) return
-      const secureNumber = secureFields.create({
-        name: 'pan',
-        options: {
-          styles: panStyles,
-          label: 'Número do cartão',
-          onChange: ({ error, isDirty }) => {
-            setIsPanValid(!error)
-            setIsPanTouched(isDirty)
-          },
-        },
-      })
-
-      const secureExpiration = secureFields.create({
-        name: 'expiration',
-        options: {
-          styles: expirationStyles,
-          label: 'MM/YY',
-          onChange: ({ error, isDirty }) => {
-            setIsExpirationValid(!error)
-            setIsExpirationTouched(isDirty)
-          },
-        },
-      })
-
-      const secureCvv = secureFields.create({
-        name: 'cvv',
-        options: {
-          styles: cvvStyles,
-          label: 'CVV',
-          onChange: ({ error, isDirty }) => {
-            setIsCvvValid(!error)
-            setIsCvvTouched(isDirty)
-          },
-        },
-      })
-
-      secureNumber.render('#pan')
-      secureExpiration.render('#expiration')
-      secureCvv.render('#cvv')
-
-    }, 1)
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [secureFields])
-
   // useEffect(() => {
-  //   if (!secureFields) return
-  //   const secureNumber = secureFields.create({
-  //     name: 'pan',
-  //     options: {
-  //       styles: panStyles,
-  //       label: 'Número do cartão',
-  //       onChange: ({ error, isDirty }) => {
-  //         setIsPanValid(!error)
-  //         setIsPanTouched(isDirty)
+  //   const timeoutId = setTimeout(() => {
+  //     if (!secureFields) return
+  //     const secureNumber = secureFields.create({
+  //       name: 'pan',
+  //       options: {
+  //         styles: panStyles,
+  //         label: 'Número do cartão',
+  //         onChange: ({ error, isDirty }) => {
+  //           setIsPanValid(!error)
+  //           setIsPanTouched(isDirty)
+  //         },
   //       },
-  //     },
-  //   })
+  //     })
 
-  //   const secureExpiration = secureFields.create({
-  //     name: 'expiration',
-  //     options: {
-  //       styles: expirationStyles,
-  //       label: 'MM/YY',
-  //       onChange: ({ error, isDirty }) => {
-  //         setIsExpirationValid(!error)
-  //         setIsExpirationTouched(isDirty)
+  //     const secureExpiration = secureFields.create({
+  //       name: 'expiration',
+  //       options: {
+  //         styles: expirationStyles,
+  //         label: 'MM/YY',
+  //         onChange: ({ error, isDirty }) => {
+  //           setIsExpirationValid(!error)
+  //           setIsExpirationTouched(isDirty)
+  //         },
   //       },
-  //     },
-  //   })
+  //     })
 
-  //   const secureCvv = secureFields.create({
-  //     name: 'cvv',
-  //     options: {
-  //       styles: cvvStyles,
-  //       label: 'CVV',
-  //       onChange: ({ error, isDirty }) => {
-  //         setIsCvvValid(!error)
-  //         setIsCvvTouched(isDirty)
+  //     const secureCvv = secureFields.create({
+  //       name: 'cvv',
+  //       options: {
+  //         styles: cvvStyles,
+  //         label: 'CVV',
+  //         onChange: ({ error, isDirty }) => {
+  //           setIsCvvValid(!error)
+  //           setIsCvvTouched(isDirty)
+  //         },
   //       },
-  //     },
-  //   })
+  //     })
 
-  //   secureNumber.render('#pan')
-  //   secureExpiration.render('#expiration')
-  //   secureCvv.render('#cvv')
+  //     secureNumber.render('#pan')
+  //     secureExpiration.render('#expiration')
+  //     secureCvv.render('#cvv')
+
+  //   }, 1)
+
+  //   return () => {
+  //     clearTimeout(timeoutId)
+  //   }
   // }, [secureFields])
+
+  useEffect(() => {
+    if (!secureFields) return
+    const secureNumber = secureFields.create({
+      name: 'pan',
+      options: {
+        styles: panStyles,
+        label: 'Número do cartão',
+        onChange: ({ error, isDirty }) => {
+          setIsPanValid(!error)
+          setIsPanTouched(isDirty)
+        },
+      },
+    })
+
+    const secureExpiration = secureFields.create({
+      name: 'expiration',
+      options: {
+        styles: expirationStyles,
+        label: 'MM/YY',
+        onChange: ({ error, isDirty }) => {
+          setIsExpirationValid(!error)
+          setIsExpirationTouched(isDirty)
+        },
+      },
+    })
+
+    const secureCvv = secureFields.create({
+      name: 'cvv',
+      options: {
+        styles: cvvStyles,
+        label: 'CVV',
+        onChange: ({ error, isDirty }) => {
+          setIsCvvValid(!error)
+          setIsCvvTouched(isDirty)
+        },
+      },
+    })
+
+    secureNumber.render('#pan')
+    secureExpiration.render('#expiration')
+    secureCvv.render('#cvv')
+  }, [secureFields])
 
   const error =
     (!isPanValid && isPanTouched) || (!isExpirationValid && isExpirationTouched) || (!isCvvValid && isCvvTouched)
